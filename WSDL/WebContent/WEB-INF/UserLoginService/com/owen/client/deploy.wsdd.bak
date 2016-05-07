@@ -1,0 +1,30 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UserLoginService WSDL service -->
+
+  <service name="UserLogin" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://client.owen.com"/>
+      <parameter name="wsdlServiceElement" value="UserLoginService"/>
+      <parameter name="schemaQualified" value="http://client.owen.com"/>
+      <parameter name="wsdlServicePort" value="UserLogin"/>
+      <parameter name="className" value="com.owen.client.UserLoginSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="UserLogin"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="userlogin" qname="operNS:userlogin" xmlns:operNS="http://client.owen.com" returnQName="retNS:userloginReturn" xmlns:retNS="http://client.owen.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:name" xmlns:pns="http://client.owen.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://client.owen.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="userlogin"/>
+
+  </service>
+</deployment>
